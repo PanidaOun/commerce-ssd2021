@@ -1,0 +1,45 @@
+.row
+  .col-6
+    h1 Products List
+  
+.row
+  .col
+    = form_tag root_path, method: :get do
+     = text_field_tag 'search', @search, placeholder: 'Type something here',
+      class: 'form-control'
+
+.row.mt-2
+  .col
+    table.table.table-bordered.table-striped.table-hover
+      thead.thead-dark
+        tr
+          th ID
+          th Title
+          th Description
+          th Stock
+          th Action
+      tbody
+        - @products.each do |pr|
+          tr.hoverable-row
+            td = pr.id
+            td.font-weight-bold = pr.title
+            td = pr.description
+            td = pr.stock
+            td
+              span 
+                = link_to product_path(pr) do
+                  i.fas.fa-eye
+              span.ml-3
+                = link_to edit_product_path(pr) do
+                  i.fas.fa-pen
+              span.ml-3
+                = link_to product_path(pr), method: :delete, data: {confirm: "Are you sure?"} do
+                  i.fas.fa-trash
+
+.row
+  .col-6
+      = paginate @products
+  .col-6
+    .float-right
+      = link_to new_product_path do 
+        = button_tag 'Add New Product', class: 'btn btn-primary'
