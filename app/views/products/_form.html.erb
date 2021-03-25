@@ -31,7 +31,7 @@
     <%= form.label :categories %>
     <%= form.collection_select :category_ids, Category.order(:name), :id, :name, {}, class:"form-control select2", multiple: true %>
   </div>
-
+  <br>
   <div class="actions">
     <%= form.submit %>
   </div>
