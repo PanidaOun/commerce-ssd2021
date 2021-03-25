@@ -11,19 +11,25 @@
     </div>
   <% end %>
 
-  <div class="field">
+  
+  <div class="field.form-group">
     <%= form.label :title %>
-    <%= form.text_area :title %>
+    <%= form.text_area :title, class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field.form-group">
     <%= form.label :description %>
-    <%= form.text_area :description %>
+    <%= form.text_area :description, class:"form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field.form-group">
     <%= form.label :stock %>
-    <%= form.number_field :stock %>
+    <%= form.number_field :stock, class:"form-control" %>
+  </div>
+
+  <div class = "field.form-group"> 
+    <%= form.label :categories %>
+    <%= form.collection_select :category_ids, Category.order(:name), :id, :name, {}, class:"form-control select2", multiple: true %>
   </div>
 
   <div class="actions">

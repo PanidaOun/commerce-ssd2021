@@ -14,6 +14,11 @@
   <strong>Stock:</strong>
   <%= @product.stock %>
 </p>
-
+<p>
+  <strong>Category:</strong>
+  <% @product.categories.each do |category| %>
+      <span href="#" class="badge badge-primary"><%= category.name %></span>
+  <% end %>
+</p>
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', root_path %>

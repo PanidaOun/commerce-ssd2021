@@ -1,0 +1,33 @@
+.row
+  .col-6
+    h1 Categories List
+
+
+.row.mt-2
+  .col
+    table.table.table-bordered.table-striped.table-hover
+      thead.thead-dark
+        tr
+          th Name
+          th Action
+      tbody
+        - @categories.each do |pr|
+          tr.hoverable-row
+            td = pr.name
+            td
+              span 
+                = link_to category_path(pr) do
+                  i.fas.fa-eye
+              - if admin_signed_in?
+                span.ml-3
+                  = link_to edit_category_path(pr) do
+                    i.fas.fa-pen
+                span.ml-3
+                  = link_to category_path(pr), method: :delete, data: {confirm: "Are you sure?"} do
+                    i.fas.fa-trash         
+
+.row
+  .col-6
+    .float-right
+      = link_to new_category_path do 
+        = button_tag 'New Category', class: 'btn btn-primary'

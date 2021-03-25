@@ -29,12 +29,13 @@
               span 
                 = link_to product_path(pr) do
                   i.fas.fa-eye
-              span.ml-3
-                = link_to edit_product_path(pr) do
-                  i.fas.fa-pen
-              span.ml-3
-                = link_to product_path(pr), method: :delete, data: {confirm: "Are you sure?"} do
-                  i.fas.fa-trash
+              - if admin_signed_in?
+                span.ml-3
+                  = link_to edit_product_path(pr) do
+                    i.fas.fa-pen
+                span.ml-3
+                  = link_to product_path(pr), method: :delete, data: {confirm: "Are you sure?"} do
+                    i.fas.fa-trash         
 
 .row
   .col-6
