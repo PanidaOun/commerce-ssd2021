@@ -7,13 +7,17 @@
     = form_tag root_path, method: :get do
      = text_field_tag 'search', @search, placeholder: 'Type something here',
       class: 'form-control'
-
+  - if admin_signed_in?
+    .col-2
+      = link_to products_path(format: :csv) do
+        = button_tag 'Download CSV', class: 'btn btn-secondary float-right'
 .row.mt-2
   .col
     table.table.table-bordered.table-striped.table-hover
       thead.thead-dark
         tr
           th ID
+          th Status
           th Title
           th Description
           th Stock
@@ -22,6 +26,7 @@
         - @products.each do |pr|
           tr.hoverable-row
             td = pr.id
+            td = pr.status
             td.font-weight-bold = pr.title
             td = pr.description
             td = pr.stock
@@ -44,3 +49,12 @@
     .float-right
       = link_to new_product_path do 
         = button_tag 'Add New Product', class: 'btn btn-primary'
+- if admin_signed_in?
+  div
+    hr
+
+  .row
+    .col
+      = form_tag products_csv_upload_path, multipart: true do
+        div = file_field_tag :csv_file
+        div = submit_tag :upload

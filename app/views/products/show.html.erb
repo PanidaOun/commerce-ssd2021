@@ -20,5 +20,10 @@
       <span href="#" class="badge badge-primary"><%= category.name %></span>
   <% end %>
 </p>
+
+<p>
+  <strong>Status:</strong>
+  <span href="#" class="badge badge-danger"><%= @product.status %></span>
+</p>
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', root_path %>

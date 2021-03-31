@@ -25,11 +25,19 @@
   <div class="field.form-group">
     <%= form.label :stock %>
     <%= form.number_field :stock, class:"form-control" %>
+    <br>
   </div>
 
   <div class = "field.form-group"> 
     <%= form.label :categories %>
-    <%= form.collection_select :category_ids, Category.order(:name), :id, :name, {}, class:"form-control select2", multiple: true %>
+    <br>
+    <%= form.collection_check_boxes :category_ids, Category.order(:name ), :id, :name%>
+  </div>
+
+  <div class = "field.form-group"> 
+    <%= form.label :Status %>
+    <br>
+    <%= form.select :status, Product.statuses.keys.map {|u| [u.titleize, u]} %>
   </div>
   <br>
   <div class="actions">

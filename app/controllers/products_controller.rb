@@ -4,6 +4,10 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     @products = Product.all
+    respond_to do |format|
+      format.html
+      format.csv{ send_data generate_csv(Product.all), file_name: 'products.csv' }
+    end
   end
 
   # GET /products/1 or /products/1.json
@@ -56,6 +60,15 @@ class ProductsController < ApplicationController
     end
   end
 
+  def csv_upload
+    data = params[:csv_file].read.split("\n")
+    data.each do |line|
+      attr = line.split(",").map(&:strip)
+      Product.create title: attr[0], description: attr[1], stock: attr[2]
+    end
+    redirect_to root_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
@@ -64,6 +77,12 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:title, :description, :stock, :category_ids=>[])
+      params.require(:product).permit(:title, :description, :stock, :status, :category_ids=>[])
+    end
+
+    def generate_csv(products)
+      products.map do |a|
+        [a.title, a.description].join(',')
+      end.join("\n")
     end
 end
