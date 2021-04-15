@@ -4,12 +4,12 @@
   
 .row
   .col
-    = form_tag root_path, method: :get do
+    = form_tag admins_products_path, method: :get do
      = text_field_tag 'search', @search, placeholder: 'Type something here',
       class: 'form-control'
   - if admin_signed_in?
     .col-2
-      = link_to products_path(format: :csv) do
+      = link_to admins_products_path(format: :csv) do
         = button_tag 'Download CSV', class: 'btn btn-secondary float-right'
 .row.mt-2
   .col
@@ -17,29 +17,38 @@
       thead.thead-dark
         tr
           th ID
+          th Image
           th Status
           th Title
           th Description
           th Stock
+          th Supporting images
           th Action
       tbody
         - @products.each do |pr|
           tr.hoverable-row
             td = pr.id
+            td
+              -if pr.primary_image.attached?
+                = image_tag pr.primary_image , width: "50px"
             td = pr.status
             td.font-weight-bold = pr.title
             td = pr.description
             td = pr.stock
             td
+              -if pr.supporting_images.attached?
+                - pr.supporting_images.each do |image|
+                  =image_tag image, width: "50px"
+            td
               span 
-                = link_to product_path(pr) do
+                = link_to admins_product_path(pr) do
                   i.fas.fa-eye
               - if admin_signed_in?
                 span.ml-3
-                  = link_to edit_product_path(pr) do
+                  = link_to edit_admins_product_path(pr) do
                     i.fas.fa-pen
                 span.ml-3
-                  = link_to product_path(pr), method: :delete, data: {confirm: "Are you sure?"} do
+                  = link_to admins_product_path(pr), method: :delete, data: {confirm: "Are you sure?"} do
                     i.fas.fa-trash         
 
 .row
@@ -47,7 +56,7 @@
       = paginate @products
   .col-6
     .float-right
-      = link_to new_product_path do 
+      = link_to new_admins_product_path do 
         = button_tag 'Add New Product', class: 'btn btn-primary'
 - if admin_signed_in?
   div
@@ -55,6 +64,6 @@
 
   .row
     .col
-      = form_tag products_csv_upload_path, multipart: true do
+      = form_tag admins_products_csv_upload_path, multipart: true do
         div = file_field_tag :csv_file
         div = submit_tag :upload

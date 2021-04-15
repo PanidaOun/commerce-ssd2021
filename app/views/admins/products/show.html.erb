@@ -1,9 +1,15 @@
-<p id="notice"><%= notice %></p>
 
 <p style="font-size: 40px; font-family: Helvetica, Arial, sans-serif; font-weight: bold;">
   <%# <strong>Title:</strong> %>
   <%= @product.title %>
 </p>
+
+<p id="notice"><%= notice %></p>
+<% if @product.primary_image.attached? %>
+       <%= image_tag @product.primary_image,width: "200px" %>
+       <br>
+       </br>
+<%end%>
 
 <p>
   <strong>Description:</strong>
@@ -25,5 +31,13 @@
   <strong>Status:</strong>
   <span href="#" class="badge badge-danger"><%= @product.status %></span>
 </p>
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', root_path %>
+<p>
+  <strong>Supporting images:</strong>
+    <% if @product.supporting_images.attached? %>
+      <% @product.supporting_images.each do |image| %>
+        <%= image_tag image, width: "100px", height: "100px" %>
+      <% end %>
+    <%end%>
+</p>
+<%= link_to 'Edit', edit_admins_product_path(@product) %> |
+<%= link_to 'Back', admins_products_path %>
