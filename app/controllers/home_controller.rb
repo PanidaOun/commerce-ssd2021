@@ -4,6 +4,6 @@ class HomeController < ApplicationController
     @products = Product.all
     @products = @products
       .search(@search) if @search.present?
-    @products = @products.page(params[:page]).per(4)
+    @products = @products.page(params[:page]).per(8)
   end
 end
