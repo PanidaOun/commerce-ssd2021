@@ -5,6 +5,7 @@ ruby '2.6.6'
 # For authentication
 gem 'devise'
 # For views rendering
+gem 'aws-sdk-s3'
 gem 'slim'
 # For pagination
 gem 'kaminari'
