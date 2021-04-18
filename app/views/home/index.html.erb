@@ -15,9 +15,9 @@
                     <%= image_tag(pr.primary_image, height: '300px', width: '300px', class: 'mx-auto img-thumbnail') %>
                     <div class="shop-item-detail"><a class="btn btn-round btn-b"><span class="icon-basket">Add To Cart</span></a></div>
                   </div>
+                  <h3 class="shop-item-title font-alt" ><%= pr.title %></h3>
+                  <%= link_to 'View details', admins_product_path(pr), class: "btn btn-circle btn-d" ,style: "font-size: 10px; " %>
               </div>
-              <h3 class="shop-item-title font-alt" style="text-align: center;"><%= pr.title %></h3>
-              <%= link_to 'View details', admins_product_path(pr), class: "btn btn-circle btn-d" ,style: "font-size: 10px; margin: 10px 70px; " %>
             </div>
             <% end %>
         <% end %>
