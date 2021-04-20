@@ -5,7 +5,7 @@
 .row
   .col
     = form_tag admins_products_path, method: :get do
-     = text_field_tag 'search', @search, placeholder: 'Type something here',
+     = text_field_tag 'search', @search, placeholder: 'Type to find what you want',
       class: 'form-control'
   - if admin_signed_in?
     .col-2
