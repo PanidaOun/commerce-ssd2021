@@ -137,7 +137,10 @@ function showSlides() {
                   <div class="shop-item-image">
                       <%# <img src="assets/images/shop/product-9.jpg" alt="Men’s Garb"/> %>
                     <%= image_tag(pr.primary_image, height: '300px', width: '300px', class: 'mx-auto img-thumbnail') %>
-                    <div class="shop-item-detail"><a class="btn btn-round btn-b"><span class="icon-basket">Add To Cart</span></a></div>
+                    <div class="shop-item-detail">
+                      <%= link_to 'Buy now', orders_new_path(:id => pr.id), class:"btn btn-round btn-b icon-basket" %>
+                      <%# <a class="btn btn-round btn-b"><span class="icon-basket">Buy now</span></a> %>
+                    </div>
                   </div>
                   <h3 class="shop-item-title font-alt" ><%= pr.title %></h3>
                   <%= link_to 'View details', admins_product_path(pr), class: "btn btn-circle btn-d" ,style: "font-size: 10px; " %>

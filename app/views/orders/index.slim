@@ -1,0 +1,17 @@
+h1 Order List Page
+- @orders.each do |order|
+  .row.mt-2
+    .col
+      .card
+        .card-body
+          .row
+            .col-3
+              - if Product.find(order.product_id).primary_image.attached?
+                = image_tag  Product.find(order.product_id).primary_image, width: '100%'
+            .col-9
+              .row
+                .col
+                  h1 =  Product.find(order.product_id).title
+              .row
+                .col
+                  =  "address: #{order.address}"

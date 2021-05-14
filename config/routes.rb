@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :categories
+  get '/orders/new_order', to: 'orders#new', as: 'orders_new'
+  resources :orders
   devise_for :admins
   root 'home#index'
   namespace :admins do

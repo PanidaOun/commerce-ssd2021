@@ -1,0 +1,7 @@
+h1 = @product.title
+- if @product.primary_image.attached?
+    = image_tag @product.primary_image, height: '300px', width: '300px'
+h3 = "Address: #{@order.address}"
+
+= link_to root_path do 
+    = button_tag 'Back', class: 'btn btn-round btn-b'
